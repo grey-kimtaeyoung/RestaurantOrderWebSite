@@ -5,6 +5,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import kr.co.restaurant.ordering.application.RestaurantService;
+import kr.co.restaurant.ordering.domain.MenuItemRepository;
+import kr.co.restaurant.ordering.domain.MenuItemRepositoryImpl;
+import kr.co.restaurant.ordering.domain.Restaurant;
 import kr.co.restaurant.ordering.domain.RestaurantRepository;
 import kr.co.restaurant.ordering.domain.RestaurantRepositoryImpl;
 import org.junit.Test;
@@ -22,8 +26,14 @@ public class RestaurantControllerTest {
   @Autowired
   private MockMvc mvc;
 
+  @SpyBean(RestaurantService.class)
+  private RestaurantService restaurantService;
+
   @SpyBean(RestaurantRepositoryImpl.class)
   private RestaurantRepository restaurantRepository;
+
+  @SpyBean(MenuItemRepositoryImpl.class)
+  private MenuItemRepository menuItemRepository;
 
   @Test
   public void list() throws Exception {
@@ -39,8 +49,13 @@ public class RestaurantControllerTest {
   public void detail() throws Exception {
     mvc.perform(get("/restaurants/1004"))
         .andExpect(status().isOk())
-        .andExpect(content().string(containsString("\"id\":1004")))
-        .andExpect(content().string(containsString("\"name\":\"Bob zip\"")));
+        .andExpect(content().string(containsString("\"id\":1004")
+        ))
+        .andExpect(content().string(containsString("\"name\":\"Bob zip\"")
+        ))
+        .andExpect(content().string(
+            containsString("Kimchi")
+        ));
 
     mvc.perform(get("/restaurants/2020"))
         .andExpect(status().isOk())
