@@ -1,12 +1,12 @@
 package kr.co.restaurant.ordering;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class OrderingApplicationTests {
 
-	@Test
+  @Test
 	void contextLoads() {
 	}
 }

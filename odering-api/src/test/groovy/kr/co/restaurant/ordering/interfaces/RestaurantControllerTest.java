@@ -14,17 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import kr.co.restaurant.ordering.application.RestaurantService;
 import kr.co.restaurant.ordering.domain.MenuItem;
-import kr.co.restaurant.ordering.domain.MenuItemRepository;
-import kr.co.restaurant.ordering.domain.MenuItemRepositoryImpl;
 import kr.co.restaurant.ordering.domain.Restaurant;
-import kr.co.restaurant.ordering.domain.RestaurantRepository;
-import kr.co.restaurant.ordering.domain.RestaurantRepositoryImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -50,7 +45,7 @@ public class RestaurantControllerTest {
         .andExpect(content().string(containsString("\"id\":1004")))
         .andExpect(content().string(containsString("\"name\":\"JOKER House\"")))
         .andExpect(content().string(containsString("\"address\":\"Seoul\"")))
-        .andExpect(content().string(containsString("\"information\":\"Bob zip in Seoul\"")));
+        .andExpect(content().string(containsString("\"information\":\"JOKER House in Seoul\"")));
   }
 
   @Test

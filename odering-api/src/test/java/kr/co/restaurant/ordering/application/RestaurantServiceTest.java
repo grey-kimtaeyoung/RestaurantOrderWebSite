@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import kr.co.restaurant.ordering.domain.MenuItem;
 import kr.co.restaurant.ordering.domain.MenuItemRepository;
 import kr.co.restaurant.ordering.domain.Restaurant;
@@ -40,7 +41,7 @@ public class RestaurantServiceTest {
     restaurants.add(restaurant);
     given(restaurantRepository.findAll()).willReturn(restaurants);
 
-    given(restaurantRepository.findById(1004L)).willReturn(restaurant);
+    given(restaurantRepository.findById(1004L)).willReturn(Optional.of(restaurant));
 
   }
 

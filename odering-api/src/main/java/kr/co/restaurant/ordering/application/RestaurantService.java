@@ -23,7 +23,9 @@ public class RestaurantService {
   }
 
   public Restaurant getRestaurant(Long id) {
-    Restaurant restaurant = restaurantRepository.findById(id);
+    //null에 대한 exception 처리가 안되어있기 때문에 실무에서는 아래와 같이 할 경우 문제 발생.
+    //나중에 예외처리 추가 될 예정
+    Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
 
     List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
     restaurant.setMenuItems(menuItems);

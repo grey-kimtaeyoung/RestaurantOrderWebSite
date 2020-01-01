@@ -1,6 +1,6 @@
 package kr.co.restaurant.ordering.domain;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.hamcrest.CoreMatchers.is;
