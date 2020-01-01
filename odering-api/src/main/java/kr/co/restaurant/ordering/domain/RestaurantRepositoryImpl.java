@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RestaurantRepositoryImpl implements RestaurantRepository {
 
-  List<Restaurant> restaurants = new ArrayList<>();
+  private List<Restaurant> restaurants = new ArrayList<>();
 
   public RestaurantRepositoryImpl() {
     restaurants.add(new Restaurant(1004L, "Bob zip", "Seoul"));
@@ -22,11 +22,15 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
   @Override
   public Restaurant findById(Long id) {
     Restaurant restaurant;
-    restaurant = restaurants.stream()
-        .filter(r -> r.getId().equals(id))
-        .findFirst()
-        .orElse(null);
+    restaurant = restaurants.stream().filter(r -> r.getId().equals(id)).findFirst().orElse(null);
 
+    return restaurant;
+  }
+
+  @Override
+  public Restaurant save(Restaurant restaurant) {
+    restaurant.setId(1234L);
+    restaurants.add(restaurant);
     return restaurant;
   }
 }
