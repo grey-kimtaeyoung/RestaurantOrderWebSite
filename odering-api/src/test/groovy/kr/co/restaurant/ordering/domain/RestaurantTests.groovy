@@ -11,7 +11,10 @@ class RestaurantTests extends Specification {
 
         // 테스트할 대상 코드를 실행
         when:
-        Restaurant restaurant = new Restaurant(name, address)
+        Restaurant restaurant = Restaurant.builder()
+                .name(name)
+                .address(address)
+                .build()
 
         // 테스트 결과 검증
         then:

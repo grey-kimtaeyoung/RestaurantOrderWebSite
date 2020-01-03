@@ -6,6 +6,7 @@ import java.util.List;
 import kr.co.restaurant.ordering.application.RestaurantService;
 import kr.co.restaurant.ordering.domain.Restaurant;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 public class RestaurantController {
 
@@ -38,11 +40,12 @@ public class RestaurantController {
   @PostMapping("/restaurants")
   public ResponseEntity<?> create(@RequestBody Restaurant resource)
       throws URISyntaxException {
-    String name = resource.getName();
-    String address = resource.getAddress();
 
-    Restaurant restaurant = new Restaurant(name, address);
-    restaurantService.addRestaurant(restaurant);
+    Restaurant restaurant = restaurantService.addRestaurant(
+        Restaurant.builder()
+            .name(resource.getName())
+            .address(resource.getAddress())
+            .build());
 
     URI location = new URI("/restaurants/" + restaurant.getId());
     return ResponseEntity.created(location).body("{}");

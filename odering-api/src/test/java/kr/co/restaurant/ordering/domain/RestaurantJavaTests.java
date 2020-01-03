@@ -1,17 +1,22 @@
 package kr.co.restaurant.ordering.domain;
 
-import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-@SpringBootTest
-class RestaurantJavaTests {
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+public class RestaurantJavaTests {
 
   @Test
   public void creation() {
-    Restaurant restaurant = new Restaurant(1004L, "Bob zip", "Seoul");
+    Restaurant restaurant = Restaurant.builder()
+        .id(1004L)
+        .name("Bob zip")
+        .address("Seoul")
+        .build();
 
     assertThat(restaurant.getId(), is(1004L));
     assertThat(restaurant.getName(), is("Bob zip"));
@@ -20,7 +25,11 @@ class RestaurantJavaTests {
 
   @Test
   public void information() {
-    Restaurant restaurant = new Restaurant(1004L, "Bob zip", "Seoul");
+    Restaurant restaurant = Restaurant.builder()
+        .id(1004L)
+        .name("Bob zip")
+        .address("Seoul")
+        .build();
 
     assertThat(restaurant.getInformation(), is("Bob zip in Seoul"));
   }
