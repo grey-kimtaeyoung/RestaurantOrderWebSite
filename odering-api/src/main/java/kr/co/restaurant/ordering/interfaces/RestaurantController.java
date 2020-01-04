@@ -3,6 +3,7 @@ package kr.co.restaurant.ordering.interfaces;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import javax.validation.Valid;
 import kr.co.restaurant.ordering.application.RestaurantService;
 import kr.co.restaurant.ordering.domain.Restaurant;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class RestaurantController {
   }
 
   @PostMapping("/restaurants")
-  public ResponseEntity<?> create(@RequestBody Restaurant resource)
+  public ResponseEntity<?> create(@Valid @RequestBody Restaurant resource)
       throws URISyntaxException {
 
     Restaurant restaurant = restaurantService.addRestaurant(
@@ -52,7 +53,8 @@ public class RestaurantController {
   }
 
   @PatchMapping("restaurants/{id}")
-  public String update(@PathVariable("id") Long id, @RequestBody Restaurant resource) {
+  public String update(@PathVariable("id") Long id,
+                       @Valid @RequestBody Restaurant resource) {
     String name = resource.getName();
     String address = resource.getAddress();
 
