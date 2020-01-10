@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -22,6 +23,9 @@ public class Review {
   @GeneratedValue
   @Getter
   private Long id;
+
+  @Setter
+  private Long restaurantId;
 
   @NotEmpty
   private String name;

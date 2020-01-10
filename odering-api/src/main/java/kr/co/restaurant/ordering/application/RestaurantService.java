@@ -6,6 +6,8 @@ import kr.co.restaurant.ordering.domain.MenuItemRepository;
 import kr.co.restaurant.ordering.domain.Restaurant;
 import kr.co.restaurant.ordering.domain.RestaurantNotFoundException;
 import kr.co.restaurant.ordering.domain.RestaurantRepository;
+import kr.co.restaurant.ordering.domain.Review;
+import kr.co.restaurant.ordering.domain.ReviewRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class RestaurantService {
   private final RestaurantRepository restaurantRepository;
   private final MenuItemRepository menuItemRepository;
+  private ReviewRepository reviewRepository;
 
   public RestaurantService(
-      RestaurantRepository restaurantRepository, MenuItemRepository menuItemRepository) {
+      RestaurantRepository restaurantRepository, MenuItemRepository menuItemRepository,
+      ReviewRepository reviewRepository) {
     this.restaurantRepository = restaurantRepository;
     this.menuItemRepository = menuItemRepository;
+    this.reviewRepository = reviewRepository;
   }
 
   public List<Restaurant> getRestaurants() {
@@ -31,6 +36,9 @@ public class RestaurantService {
 
     List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
     restaurant.setMenuItems(menuItems);
+
+    List<Review> reviews = reviewRepository.findAllByRestaurantId(id);
+    restaurant.setReviews(reviews);
 
     return restaurant;
   }
