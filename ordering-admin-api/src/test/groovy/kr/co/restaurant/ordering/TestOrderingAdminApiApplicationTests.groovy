@@ -4,5 +4,5 @@ import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification;
 
 @SpringBootTest
-class TestOrderingApplicationTests extends Specification{
+class TestOrderingAdminApiApplicationTests extends Specification{
 }
