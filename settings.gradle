@@ -1,5 +1,3 @@
 rootProject.name = 'ordering'
 
-include 'ordering-admin-api'
-include 'ordering-common'
-
+include 'ordering-common', 'ordering-admin-api'
