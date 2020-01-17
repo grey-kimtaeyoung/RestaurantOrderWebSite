@@ -29,6 +29,11 @@ public class MenuItemServiceTest {
   }
 
   @Test
+  public void getMenuItems() {
+
+  }
+
+  @Test
   public void bulkUpdate() {
     List<MenuItem> menuItems = new ArrayList<>();
     
