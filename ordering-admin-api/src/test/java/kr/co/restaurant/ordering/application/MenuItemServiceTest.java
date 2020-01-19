@@ -1,5 +1,6 @@
 package kr.co.restaurant.ordering.application;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -30,7 +31,11 @@ public class MenuItemServiceTest {
 
   @Test
   public void getMenuItems() {
+     List<MenuItem> menuItems = menuItemService.getMenuItems(1004L);
 
+     MenuItem menuItem = menuItems.get(0);
+
+     assertThat(menuItem.getName(), is("Kimchi"));
   }
 
   @Test
