@@ -4,6 +4,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -31,11 +32,14 @@ public class MenuItemServiceTest {
 
   @Test
   public void getMenuItems() {
-     List<MenuItem> menuItems = menuItemService.getMenuItems(1004L);
 
-     MenuItem menuItem = menuItems.get(0);
+    List<MenuItem> mockMenuItems = menuItemService.getMenuItems(1004L);
 
-     assertThat(menuItem.getName(), is("Kimchi"));
+    given(menuItemRepository.findAllByRestaurantId(1004L)).willReturn(mockMenuItems);
+
+    MenuItem menuItem = mockMenuItems.get(0);
+
+    assertThat(menuItem.getName(), is("Kimchi"));
   }
 
   @Test
