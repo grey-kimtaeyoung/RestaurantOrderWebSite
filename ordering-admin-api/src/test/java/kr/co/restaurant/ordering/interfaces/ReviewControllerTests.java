@@ -1,11 +1,14 @@
 package kr.co.restaurant.ordering.interfaces;
 
 import static org.junit.Assert.*;
+import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,6 +33,13 @@ public class ReviewControllerTests {
 
   @MockBean
   private ReviewService reviewService;
+
+  @Test
+  public void list() throws Exception {
+    mvc.perform(get("/reviews"))
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("Cool!"));
+  }
 
   @Test
   public void createWithValidAttriutes() throws Exception {

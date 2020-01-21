@@ -32,10 +32,12 @@ public class MenuItemServiceTest {
 
   @Test
   public void getMenuItems() {
-
-    List<MenuItem> mockMenuItems = menuItemService.getMenuItems(1004L);
+    List<MenuItem> mockMenuItems = new ArrayList<>();
+    mockMenuItems.add(MenuItem.builder().name("Kimchi").build());
 
     given(menuItemRepository.findAllByRestaurantId(1004L)).willReturn(mockMenuItems);
+
+    List<MenuItem> menuItems = menuItemService.getMenuItems(1004L);
 
     MenuItem menuItem = mockMenuItems.get(0);
 
