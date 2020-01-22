@@ -1,7 +1,7 @@
 package kr.co.restaurant.ordering.interfaces;
 
+import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.*;
-import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
@@ -13,6 +13,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.List;
 import kr.co.restaurant.ordering.application.ReviewService;
 import kr.co.restaurant.ordering.domain.Review;
 import org.junit.Test;
@@ -23,6 +25,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ReviewController.class)
@@ -36,9 +39,13 @@ public class ReviewControllerTests {
 
   @Test
   public void list() throws Exception {
+    List<Review> reviews = new ArrayList<>();
+    reviews.add(Review.builder().desc("cool").build());
+    given(reviewService.getReviews()).willReturn(reviews);
+
     mvc.perform(get("/reviews"))
         .andExpect(status().isOk())
-        .andExpect(content().string(containsString("Cool!"));
+        .andExpect((ResultMatcher) content().string(containsString("Cool!")));
   }
 
   @Test

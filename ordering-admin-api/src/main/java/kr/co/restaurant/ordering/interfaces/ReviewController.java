@@ -2,10 +2,12 @@ package kr.co.restaurant.ordering.interfaces;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import javax.validation.Valid;
 import kr.co.restaurant.ordering.application.ReviewService;
 import kr.co.restaurant.ordering.domain.Review;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,11 @@ public class ReviewController {
 
   ReviewController(ReviewService reviewService) {
     this.reviewService = reviewService;
+  }
+
+  @GetMapping("/reviews")
+  public List<Review> list() {
+    return null;
   }
 
   @PostMapping("/restaurants/{restaurantId}/reviews")
